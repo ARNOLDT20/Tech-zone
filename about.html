@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | T20 CLASSIC Tech</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6e48aa;
+            --secondary: #9d50bb;
+            --dark: #0f0c29;
+            --darker: #07051a;
+        }
+        body {
+            background-color: var(--dark);
+            color: #e2e2e2;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background-color: rgba(15, 12, 41, 0.95) !important;
+            border-bottom: 1px solid rgba(110, 72, 170, 0.3);
+        }
+        .hero-about {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            padding: 6rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-about::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(110, 72, 170, 0.1) 0%, transparent 70%);
+        }
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #ffffff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .founder-card {
+            background: rgba(15, 12, 41, 0.6);
+            border: 1px solid rgba(110, 72, 170, 0.3);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        .founder-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(110, 72, 170, 0.2);
+        }
+        .founder-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            margin-top: -75px;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -50px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: 3px solid var(--darker);
+        }
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/255768418867" class="floating-whatsapp btn btn-success btn-lg rounded-circle shadow-lg">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-robot me-2"></i>T20 CLASSIC <span class="text-primary">Tech</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-about">
+        <div class="container text-center">
+            <h1 class="hero-title mb-4">Pioneering Tech Since 2024</h1>
+            <p class="lead">Building the future of automation in Tanzania and beyond</p>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="founder-card text-center p-4 pt-5">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Arnold Tarimo" class="founder-img img-fluid mb-4">
+                        <h2>Arnold Tarimo</h2>
+                        <p class="text-primary mb-3">Founder & CEO</p>
+                        <p class="mb-4">Visionary entrepreneur with a passion for democratizing automation technology across East Africa. Founded T20 CLASSIC Tech to bridge the gap between businesses and cutting-edge AI solutions.</p>
+                        <div class="d-flex justify-content-center gap-3 mb-3">
+                            <a href="mailto:atarimo117@gmail.com" class="btn btn-outline-primary"><i class="fas fa-envelope me-2"></i>atarimo117@gmail.com</a>
+                            <a href="tel:+255768418867" class="btn btn-outline-primary"><i class="fas fa-phone me-2"></i>+255 768 418 867</a>
+                        </div>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="#" class="text-muted"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#" class="text-muted"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                            <a href="#" class="text-muted"><i class="fab fa-github fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Story -->
+    <section class="py-5 bg-darker">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="mb-4">Our Story</h2>
+                    <p>Founded in 2024 by Arnold Tarimo, T20 CLASSIC Tech began as a specialized automation studio focused on WhatsApp business solutions. Recognizing the growing need for affordable AI tools in Tanzania's emerging tech ecosystem, we've rapidly expanded our service offerings.</p>
+                    <p>Today, we combine local market understanding with international-grade technical expertise to deliver bots, APKs, and cloud solutions that drive real business impact.</p>
+                    <div class="mt-4">
+                        <div class="d-flex mb-3">
+                            <div class="me-3 text-primary">
+                                <i class="fas fa-bullseye fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5>Mission</h5>
+                                <p class="text-muted mb-0">Empower African businesses through accessible automation technology</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="me-3 text-primary">
+                                <i class="fas fa-eye fa-2x"></i>
+                            </div>
+                            <div>
+                                <h5>Vision</h5>
+                                <p class="text-muted mb-0">Become East Africa's leading AI solutions provider by 2027</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Our Office" class="img-fluid rounded-3 shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Our Journey</h2>
+                <p class="text-muted">From startup to industry innovator</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4 class="text-primary">January 2024 - Foundation</h4>
+                    <p>Arnold Tarimo establishes T20 CLASSIC Tech with focus on WhatsApp automation tools for local businesses.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4 class="text-primary">March 2024 - First Clients</h4>
+                    <p>Onboarded 5 Dar es Salaam-based businesses with custom bot solutions.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4 class="text-primary">June 2024 - Service Expansion</h4>
+                    <p>Added Heroku deployment and billing management to our service portfolio.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4 class="text-primary">September 2024 - Team Growth</h4>
+                    <p>Expanded to 4 full-time developers and support staff.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4 class="text-primary">2025 Roadmap</h4>
+                    <p>Launching our proprietary bot marketplace and expanding to Kenya and Uganda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+        <div class="container text-center text-white">
+            <h2 class="mb-4">Ready to Automate Your Business?</h2>
+            <p class="lead mb-4">Let's build your custom solution together</p>
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a href="contact.html" class="btn btn-light btn-lg px-4">
+                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                </a>
+                <a href="https://wa.me/255768418867" class="btn btn-outline-light btn-lg px-4">
+                    <i class="fab fa-whatsapp me-2"></i>Chat on WhatsApp
+                </a>
+                <a href="tel:+255768418867" class="btn btn-outline-light btn-lg px-4">
+                    <i class="fas fa-phone me-2"></i>Call Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darker text-muted py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small mb-0">&copy; 2024 T20 CLASSIC Tech. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small mb-0">
+                        <a href="mailto:atarimo117@gmail.com" class="text-muted">atarimo117@gmail.com</a> | 
+                        <a href="tel:+255768418867" class="text-muted">+255 768 418 867</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

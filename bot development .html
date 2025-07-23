@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot Development - T20 CLASSIC Tech</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate on Scroll -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6e48aa;
+            --secondary: #9d50bb;
+            --dark: #0f0c29;
+            --darker: #07051a;
+            --light: #f8f9fa;
+            --lighter: #ffffff;
+            --text-dark: #212529;
+            --text-light: #f8f9fa;
+            --bg-color: var(--light);
+            --text-color: var(--text-dark);
+            --card-bg: var(--lighter);
+            --navbar-bg: var(--lighter);
+            --footer-bg: var(--dark);
+            --footer-text: var(--text-light);
+            --service-card-bg: var(--lighter);
+            --service-card-border: rgba(110, 72, 170, 0.2);
+            --bot-demo-bg: #f8f9fa;
+            --bot-msg-bg: rgba(110, 72, 170, 0.1);
+            --user-msg-bg: rgba(0, 0, 0, 0.1);
+            --input-bg: var(--lighter);
+            --input-text: var(--text-dark);
+            --input-border: #ced4da;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: var(--dark);
+            --text-color: var(--text-light);
+            --card-bg: rgba(15, 12, 41, 0.6);
+            --navbar-bg: var(--dark);
+            --footer-bg: var(--darker);
+            --footer-text: var(--text-light);
+            --service-card-bg: rgba(15, 12, 41, 0.6);
+            --service-card-border: rgba(110, 72, 170, 0.2);
+            --bot-demo-bg: #1a1832;
+            --bot-msg-bg: rgba(110, 72, 170, 0.3);
+            --user-msg-bg: rgba(255, 255, 255, 0.1);
+            --input-bg: #343a40;
+            --input-text: var(--text-light);
+            --input-border: #495057;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Gradient Animated Background */
+        .hero {
+            background: linear-gradient(-45deg, #6e48aa, #9d50bb, #4776E6, #8E54E9);
+            background-size: 400% 400%;
+            animation: gradientBG 12s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Interactive Elements */
+        .btn-hover-glow {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        .hover-glow {
+            position: absolute;
+            background: rgba(255,255,255,0.3);
+            width: 30px;
+            height: 100%;
+            left: -40px;
+            top: 0;
+            transform: skewX(-20deg);
+            transition: all 0.6s;
+        }
+        
+        .btn-hover-glow:hover .hover-glow {
+            left: 110%;
+        }
+        
+        /* Feature Cards */
+        .feature-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: var(--card-bg);
+            border: 1px solid var(--service-card-border);
+            height: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(110, 72, 170, 0.3) !important;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Platform Cards */
+        .platform-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid var(--service-card-border);
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(110, 72, 170, 0.2) !important;
+        }
+        
+        .platform-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        /* Process Timeline */
+        .process-timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+        
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+        
+        .process-step {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .process-step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .process-step-number {
+            position: absolute;
+            left: -50px;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Theme toggle */
+        .theme-toggle {
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+        
+        .navbar {
+            background-color: var(--navbar-bg) !important;
+            transition: background-color 0.3s ease;
+        }
+        
+        .navbar-brand, .nav-link {
+            color: var(--text-color) !important;
+            transition: color 0.3s ease;
+        }
+        
+        .bg-darker {
+            background-color: var(--footer-bg) !important;
+            transition: background-color 0.3s ease;
+        }
+        
+        footer {
+            background-color: var(--footer-bg) !important;
+            color: var(--footer-text) !important;
+        }
+        
+        footer a {
+            color: var(--footer-text) !important;
+        }
+        
+        .text-muted {
+            color: var(--text-color) !important;
+            opacity: 0.7;
+        }
+        
+        /* Demo Section */
+        .demo-container {
+            background: var(--bot-demo-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .demo-messages {
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--input-bg);
+            border-radius: 10px;
+        }
+        
+        .bot-msg {
+            background: var(--bot-msg-bg);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            max-width: 80%;
+            display: inline-block;
+        }
+        
+        .user-msg {
+            background: var(--user-msg-bg);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin: 10px 0 10px auto;
+            max-width: 80%;
+            display: inline-block;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <!-- ParticleJS Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-robot me-2"></i>T20 CLASSIC <span class="text-primary">Tech</span>
+            </a>
+            <div class="d-flex align-items-center">
+                <button class="theme-toggle me-2" id="themeToggle">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="get-started.html">Get Started</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-white py-5">
+        <div class="container content-over-particle py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                    <h1 class="display-4 fw-bold mb-4">Custom Bot Development</h1>
+                    <p class="lead mb-4">Transform your customer interactions with intelligent, automated solutions</p>
+                    <a href="get-started.html" class="btn btn-hover-glow btn-lg px-4 py-3 text-white">
+                        <span class="hover-glow"></span>
+                        Start Your Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2>Why Choose Our Bot Development Services</h2>
+                <p class="text-muted">Powerful features designed to streamline your business communications</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4>AI-Powered</h4>
+                        <p>Our bots leverage natural language processing to understand and respond to customer inquiries intelligently, providing human-like interactions.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <h4>Customizable</h4>
+                        <p>Every bot is tailored to your specific business needs, from conversation flows to integration with your existing systems.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Fast Deployment</h4>
+                        <p>Get your bot up and running in days, not weeks. Our streamlined process ensures quick setup without sacrificing quality.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h4>Multilingual</h4>
+                        <p>Support customers in multiple languages with automatic translation capabilities built into your bot.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Analytics Dashboard</h4>
+                        <p>Track performance with detailed analytics on conversation metrics, customer satisfaction, and more.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card p-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Secure</h4>
+                        <p>Enterprise-grade security with end-to-end encryption and compliance with data protection regulations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section class="py-5 bg-darker">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2>Supported Platforms</h2>
+                <p class="text-muted">We develop bots for all major messaging platforms</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up">
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h4>WhatsApp</h4>
+                        <p>Reach your customers on the world's most popular messaging platform with our WhatsApp Business API integration.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <h4>Telegram</h4>
+                        <p>Leverage Telegram's powerful bot API for community engagement, customer support, and more.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <i class="fab fa-facebook-messenger"></i>
+                        </div>
+                        <h4>Messenger</h4>
+                        <p>Connect with your Facebook audience through automated Messenger conversations.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="platform-card">
+                        <div class="platform-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h4>Custom Solutions</h4>
+                        <p>Need a bot for another platform? We build custom solutions for any messaging or communication channel.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                    <h2 class="mb-4">Our Development Process</h2>
+                    <p>We follow a proven methodology to ensure your bot meets all requirements and delivers exceptional results.</p>
+                    
+                    <div class="process-timeline mt-5">
+                        <div class="process-step" data-aos="fade-up">
+                            <div class="process-step-number">1</div>
+                            <h4>Discovery</h4>
+                            <p>We'll work with you to understand your business needs, target audience, and desired outcomes.</p>
+                        </div>
+                        <div class="process-step" data-aos="fade-up" data-aos-delay="100">
+                            <div class="process-step-number">2</div>
+                            <h4>Design</h4>
+                            <p>Our team creates conversation flows and designs the bot personality to match your brand.</p>
+                        </div>
+                        <div class="process-step" data-aos="fade-up" data-aos-delay="200">
+                            <div class="process-step-number">3</div>
+                            <h4>Development</h4>
+                            <p>We build your bot with all the specified features and integrations.</p>
+                        </div>
+                        <div class="process-step" data-aos="fade-up" data-aos-delay="300">
+                            <div class="process-step-number">4</div>
+                            <h4>Testing</h4>
+                            <p>Rigorous testing ensures your bot performs flawlessly in all scenarios.</p>
+                        </div>
+                        <div class="process-step" data-aos="fade-up" data-aos-delay="400">
+                            <div class="process-step-number">5</div>
+                            <h4>Deployment</h4>
+                            <p>We launch your bot and provide training for your team.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="demo-container">
+                        <h3 class="mb-4">Live Demo</h3>
+                        <p>Try our interactive demo to see how a custom bot could work for your business:</p>
+                        
+                        <div class="demo-messages">
+                            <div class="bot-msg">Hello! I'm a demo of T20's bot technology. What would you like to know about our services?</div>
+                            <div class="user-msg">What can your bots do?</div>
+                            <div class="bot-msg">Our bots can handle customer inquiries, process orders, provide support, collect feedback, and much more. They're available 24/7 and can be customized for your specific needs.</div>
+                            <div class="user-msg">How much does it cost?</div>
+                            <div class="bot-msg">Pricing starts at $99/month for basic bots. Would you like me to connect you with our sales team for a custom quote?</div>
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control bot-input" placeholder="Type a message...">
+                            <button class="btn btn-primary" id="sendDemoMessage">Send</button>
+                        </div>
+                        
+                        <div class="text-center">
+                            <a href="get-started.html" class="btn btn-outline-primary">Get Your Custom Bot</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="py-5 bg-darker">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2>Bot Use Cases</h2>
+                <p class="text-muted">Discover how businesses are leveraging our bot technology</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up">
+                    <div class="platform-card h-100">
+                        <div class="platform-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4>Customer Support</h4>
+                        <p>24/7 automated support that resolves common issues instantly and escalates complex cases to human agents.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="platform-card h-100">
+                        <div class="platform-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h4>E-commerce</h4>
+                        <p>Product recommendations, order tracking, and payment processing directly in chat.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="platform-card h-100">
+                        <div class="platform-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h4>Appointments</h4>
+                        <p>Automated scheduling, reminders, and rescheduling for service businesses.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="platform-card h-100">
+                        <div class="platform-icon">
+                            <i class="fas fa-poll"></i>
+                        </div>
+                        <h4>Surveys & Feedback</h4>
+                        <p>Collect customer feedback and conduct market research through conversational interfaces.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+        <div class="container text-center text-white">
+            <h2 class="mb-4" data-aos="fade-up">Ready to Automate Your Business?</h2>
+            <p class="lead mb-4" data-aos="fade-up" data-aos-delay="100">Let's build a custom bot solution tailored to your specific needs</p>
+            <div class="d-flex gap-3 justify-content-center flex-wrap" data-aos="fade-up" data-aos-delay="200">
+                <a href="get-started.html" class="btn btn-light btn-lg px-4">
+                    <i class="fas fa-paper-plane me-2"></i>Get Started
+                </a>
+                <a href="https://wa.me/255768418867" class="btn btn-outline-light btn-lg px-4">
+                    <i class="fab fa-whatsapp me-2"></i>Chat with Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darker text-muted py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    <p class="small mb-0">&copy; 2024 T20 CLASSIC Tech. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small mb-0">
+                        <a href="mailto:atarimo117@gmail.com" class="text-muted"><i class="fas fa-envelope me-1"></i>atarimo117@gmail.com</a> | 
+                        <a href="tel:+255768418867" class="text-muted"><i class="fas fa-phone me-1"></i>+255 768 418 867</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Particle.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Animate on Scroll -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out'
+        });
+        
+        // Initialize Particle.js
+        particlesJS.load('particles-js', 'https://raw.githubusercontent.com/VincentGarreau/particles.js/master/demo/particles.json', function() {
+            console.log('Particles.js loaded');
+        });
+        
+        // Dark/Light mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Check for saved theme preference or use system preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.setAttribute('data-theme', 'dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            if (document.body.getAttribute('data-theme') === 'dark') {
+                document.body.removeAttribute('data-theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
+        // Demo bot interaction
+        const demoMessages = document.querySelector('.demo-messages');
+        const demoInput = document.querySelector('.bot-input');
+        const sendButton = document.getElementById('sendDemoMessage');
+        
+        function sendDemoMessage() {
+            if (demoInput.value.trim() !== '') {
+                // Add user message
+                const userMsg = document.createElement('div');
+                userMsg.className = 'user-msg';
+                userMsg.textContent = demoInput.value;
+                demoMessages.appendChild(userMsg);
+                
+                // Bot reply
+                setTimeout(() => {
+                    const botMsg = document.createElement('div');
+                    botMsg.className = 'bot-msg';
+                    
+                    const userText = demoInput.value.toLowerCase();
+                    if (userText.includes('hello') || userText.includes('hi')) {
+                        botMsg.textContent = "Hello there! How can I help you with our bot development services today?";
+                    } else if (userText.includes('price') || userText.includes('cost')) {
+                        botMsg.textContent = "Our basic bot package starts at $99/month. Would you like me to connect you with our sales team for a custom quote?";
+                    } else if (userText.includes('feature') || userText.includes('do')) {
+                        botMsg.textContent = "Our bots can handle customer support, process orders, schedule appointments, collect feedback, and much more. They can be customized for your specific business needs.";
+                    } else if (userText.includes('time') || userText.includes('long')) {
+                        botMsg.textContent = "Standard bot deployment typically takes 3-5 business days after we receive all required information. More complex implementations may take 1-2 weeks.";
+                    } else {
+                        botMsg.textContent = "I'm a demo bot, so my knowledge is limited. For detailed inquiries about our bot development services, please contact our team directly via WhatsApp or email.";
+                    }
+                    
+                    demoMessages.appendChild(botMsg);
+                    demoMessages.scrollTop = demoMessages.scrollHeight;
+                }, 800);
+                
+                demoInput.value = '';
+                demoMessages.scrollTop = demoMessages.scrollHeight;
+            }
+        }
+        
+        demoInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendDemoMessage();
+            }
+        });
+        
+        sendButton.addEventListener('click', sendDemoMessage);
+    </script>
+</body>
+</html>
